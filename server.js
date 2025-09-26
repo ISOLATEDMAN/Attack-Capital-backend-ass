@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const authRouter = require('./routes/auth');
 const patientRouter = require('./routes/patients');
+const sessionRouter = require('./routes/sessions');
 
 const app = express();
 app.use(cors());
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use('/v1', authRouter);
 app.use('/v1',patientRouter);
+app.use('/v1', sessionRouter);
 
 app.get("/",(req,res)=>{
     res.send("server running");
