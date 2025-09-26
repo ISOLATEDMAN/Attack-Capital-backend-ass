@@ -1,0 +1,31 @@
+# Use version 3.8 of the Docker Compose file format.
+version: '3.8'
+
+# Define all the services (containers) your application needs.
+services:
+  # We'll name our service 'backend'.
+  backend:
+    # Instruction to build an image from the Dockerfile in the current directory ('.').
+    build: .
+    # Give the running container a friendly, predictable name.
+    container_name: medinote_backend
+    # Map port 8080 on your computer to port 8080 inside the container.
+    # Format is "HOST_PORT:CONTAINER_PORT".
+    ports:
+      - "8080:8080"
+    # Set up a 'volume' to sync your local code with the container's code.
+    # This is what enables live-reloading.
+    volumes:
+      - .:/app
+      # This is an important trick: it prevents the 'node_modules' from your
+      # local machine from overwriting the ones installed inside the container.
+      - /app/node_modules
+    # Define environment variables available inside the container.
+    environment:
+      - PORT=8080
+      # IMPORTANT: This passes the path to your Google credentials file.
+      # It assumes the JSON file is in your project root.
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/asstest-473218-b86a5555bb0b.json
+    # Override the Dockerfile's CMD. Use 'npm run dev' to run with nodemon.
+    command: npm run dev
+

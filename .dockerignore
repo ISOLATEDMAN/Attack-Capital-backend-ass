@@ -1,0 +1,11 @@
+Don't copy our local dependencies; we'll install fresh ones inside the container.
+node_modules
+
+Ignore any local log files.
+npm-debug.log
+
+Ignore the Docker files themselves.
+Dockerfile
+.dockerignore
+docker-compose.yml
+
